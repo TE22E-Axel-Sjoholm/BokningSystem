@@ -24,16 +24,17 @@ public class App {
             checkIfLetter(userInput);
             if(bokstav){
                 continue;
-            } else if(Integer.parseInt(userInput) == 6){
+            } else if(Integer.parseInt(userInput) == 6 && bokstav == false){
                     System.exit(0);
-                } else if(Integer.parseInt(userInput) == 1 || userInput == "2" || userInput == "3" || userInput == "4" || userInput == "5"){
-                    scene = 1;
+                } else if(Integer.parseInt(userInput) == 1 || Integer.parseInt(userInput) == 2 || Integer.parseInt(userInput) == 3 || Integer.parseInt(userInput) == 4 || Integer.parseInt(userInput) == 6){
+                    scene = Integer.parseInt(userInput);
+                    infoMeny();
+                    booking();
                 }
-                infoMeny();
-                booking(); 
-            
-            
         }
+    }
+    public static void seatMap(){
+        
     }
 
     public static void infoMeny(){
@@ -42,8 +43,8 @@ public class App {
             System.out.println("Pris för vuxen: 299.90kr");
             System.out.println("Pris för barn < 18: 149.90kr");
             System.out.println("Bussen går 16:30 från stationen");
-            System.out.println("Vid ytterligare frågor, kontakta oss på: 0724482422");
-            System.out.println("Tryck enter för att avlsuta");
+            System.out.println("Vid ytterligare frågor, kontakta oss på: +46 072-4482422");
+            System.out.println("Tryck enter för huvudmenyn");
             scanner.nextLine();
             scene = 0;   
         }
@@ -51,13 +52,14 @@ public class App {
     
     static void checkIfLetter(String userInput){
         if(userInput.equals("")){
-            System.out.println("Skriv en siffra, inte en bokstav");
+            System.out.println("Skriv en siffra, inte tomt");
+            bokstav = true;
         } else{
             for (int i = 0; i < userInput.length(); i++) {
                 char letter = userInput.charAt(i);
                 if(!Character.isDigit(letter)){
                     bokstav = true;
-                    System.out.println("Skriv en siffra, inte en bokstav");
+                    System.out.println("Skriv en siffra, inte en bokstav eller symbol");
                     i = (userInput.length()) + 1;
                 } 
             }
@@ -93,7 +95,7 @@ public class App {
                     checkIfLetter(userAge);
                     if(userAge.length() == 8 && bokstav == false){
                         priceCalc(Integer.parseInt(userAge));
-                        System.out.println("Platsen är bokad, det kostar "+price+"kr.");
+                        System.out.println("Platsen är bokad, det kostar "+price+"0kr.");
                         data[Integer.parseInt(userPlace)][1] = "1";
                         data[Integer.parseInt(userPlace)][2] = userName;
                         data[Integer.parseInt(userPlace)][3] = Integer.parseInt(userAge);
