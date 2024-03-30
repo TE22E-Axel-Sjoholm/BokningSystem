@@ -54,6 +54,9 @@ public class App {
             }
         }
     }
+    public static void priceCalc(int userAge){
+
+    }
     public static void booking(){
         while (scene == 1) {
             System.out.println("Vilken plats vill du boka? Om du inte vet, kolla lediga platser i huvudmenyn.");
@@ -65,9 +68,21 @@ public class App {
                 continue;
             } else if(data[Integer.parseInt(userPlace)][1] == "1"){
                 System.out.println("Platsen är upptagen, kolla efter lediga platser i huvudmenyn.");
-            } else if(data[Integer.parseInt(userPlace)][1] == "0"){
+            } else if(data[Integer.parseInt(userPlace)][1] == "0" || data[Integer.parseInt(userPlace)][1].isEmpty()){
                 System.out.println("Platsen är ledig, Skriv ditt namn:");
-
+                String userName = scanner.nextLine();
+                String userAge = "N/A";
+                bokstav = false;
+                while(userAge.length() != 8 && bokstav == false) {
+                    System.out.println("Vad är ditt födelsedatum? ÅÅÅÅMMDD");
+                    userAge = scanner.nextLine();
+                    bokstav = false;
+                    checkIfLetter(userAge);
+                    if(userAge.length() == 8 && bokstav == false){
+                        System.out.println("Platsen är bokad, det kostade");
+                    }
+                    bokstav = false;
+                }
             }
 
         }
