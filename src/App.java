@@ -3,17 +3,20 @@ import java.util.Scanner;
 public class App {
     public static int scene = 0;
     public static boolean bokstav;
-    public static String[][] data;
+    public static Object[][] data = new Object[0][0];
+    public static String price;
     static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) throws Exception {
-        
+        for(int i=0; i <= 2; i++){
+            data[i][1] = "0";
+        }
         while(scene == 0) {
-            System.out.println(" ");
             System.out.println("1. Boka resa");
             System.out.println("2. Se lediga platser");
             System.out.println("3. Info");
             System.out.println("4. Sök efter resa");
-            System.out.println("5. Avsluta");
+            System.out.println("5. Räkna sammanlagd inkomst");
+            System.out.println("6. Avsluta");
             String userInput = scanner.nextLine();
             bokstav = false;
             checkIfLetter(userInput);
@@ -55,7 +58,12 @@ public class App {
         }
     }
     public static void priceCalc(int userAge){
-
+        if(2024 - (userAge/10000) >= 18){
+            price = "299.90";
+        }
+        if(2024 - (userAge/10000) < 18){
+            price = "149.90";
+        }
     }
     public static void booking(){
         while (scene == 1) {
@@ -79,7 +87,11 @@ public class App {
                     bokstav = false;
                     checkIfLetter(userAge);
                     if(userAge.length() == 8 && bokstav == false){
-                        System.out.println("Platsen är bokad, det kostade");
+                        System.out.println("Platsen är bokad, det kostar "+price+"kr.");
+                        data[Integer.parseInt(userPlace)][1] = "1";
+                        data[Integer.parseInt(userPlace)][2] = userName;
+                        data[Integer.parseInt(userPlace)][3] = userAge;
+                        data[Integer.parseInt(userPlace)][4] = price;
                     }
                     bokstav = false;
                 }
