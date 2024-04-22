@@ -3,13 +3,13 @@ import java.util.Scanner;
 public class App {
     public static int scene = 0;
     public static boolean bokstav;
-    public static Object[][] data = new Object[21][5];
+    public static String[][] data = new String[21][5];
     public static double price;
     static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) throws Exception {
         for (int i = 0; i < data.length; i++) {
             for (int j = 0; j < data[i].length; j++) {
-                data[i][j] = 0;
+                data[i][j] = "0";
             }
         }
         while(scene == 0) {
@@ -30,11 +30,19 @@ public class App {
                     scene = Integer.parseInt(userInput);
                     infoMeny();
                     booking();
+                    seatMap();
                 }
         }
     }
     public static void seatMap(){
-        
+        while (scene == 2) {
+            for(int i = 1; i <= 20; i++){
+                
+            }
+            System.out.println("Tryck enter för huvudmenyn");
+            scanner.nextLine();
+            scene = 0;   
+        }
     }
 
     public static void infoMeny(){
@@ -49,10 +57,13 @@ public class App {
             scene = 0;   
         }
     }
+    public static int priceSum(int k) {
+          return 1;
+      }
     
     static void checkIfLetter(String userInput){
-        if(userInput.equals("")){
-            System.out.println("Skriv en siffra, inte tomt");
+        if(userInput == ""){
+            System.out.println("Du skrev inget");
             bokstav = true;
         } else{
             for (int i = 0; i < userInput.length(); i++) {
@@ -79,11 +90,11 @@ public class App {
             String userPlace = scanner.nextLine();
             bokstav = false;
             checkIfLetter(userPlace);
-            if(bokstav){
+            if(bokstav){        
                 continue;
-            } else if(data[Integer.parseInt(userPlace)][1].equals(1)){
+            } else if(data[Integer.parseInt(userPlace)][1] == "1"){
                 System.out.println("Platsen är upptagen, kolla efter lediga platser i huvudmenyn.");
-            } else if(data[Integer.parseInt(userPlace)][1].equals(0)){
+            } else if(data[Integer.parseInt(userPlace)][1] == "0"){
                 System.out.println("Platsen är ledig, Skriv ditt namn:");
                 String userName = scanner.nextLine();
                 String userAge = "";
@@ -98,8 +109,8 @@ public class App {
                         System.out.println("Platsen är bokad, det kostar "+price+"0kr.");
                         data[Integer.parseInt(userPlace)][1] = "1";
                         data[Integer.parseInt(userPlace)][2] = userName;
-                        data[Integer.parseInt(userPlace)][3] = Integer.parseInt(userAge);
-                        data[Integer.parseInt(userPlace)][4] = price;
+                        data[Integer.parseInt(userPlace)][3] = userAge;
+                        data[Integer.parseInt(userPlace)][4] =  Double.toString(price);
                     }
                     bokstav = false;
                 }
