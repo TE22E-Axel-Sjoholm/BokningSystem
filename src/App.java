@@ -95,6 +95,36 @@ public class App {
     }
     public static void booking(){
         while (scene == 1) {
+            System.out.println("Vill du ha en fönsterplats? Svara Ja eller Nej");
+            String userInput = scanner.nextLine();
+            if(userInput.equalsIgnoreCase("nej") || userInput.equalsIgnoreCase("no") || userInput.equalsIgnoreCase("ne") || userInput.equalsIgnoreCase("n") || userInput.equalsIgnoreCase("nah")){
+
+            } else if(userInput.equalsIgnoreCase("ja") || userInput.equalsIgnoreCase("yes") || userInput.equalsIgnoreCase("ya") || userInput.equalsIgnoreCase("y") || userInput.equalsIgnoreCase("yea") || userInput.equalsIgnoreCase("yep")){
+                String[] windows = new String[100];
+                for(int i = 0; i < 10; i++){
+                    if(i < 5){
+                        windows[i] = Integer.toString((4*i+1));
+                    } else if(i >= 5){
+                        windows[i] = Integer.toString((i-4)*4);
+                    }
+                }
+                System.out.println("Här de lediga fönsterplatserna: ");
+                for(int i = 0; i < 10; i++){
+                    if(i < 9) {
+                        if(Integer.parseInt(data[Integer.parseInt(windows[i])][1]) == 0){
+                            System.out.print(windows[i] + " ");
+                        }
+                    }
+                    if(i == 9){
+                        if(Integer.parseInt(data[Integer.parseInt(windows[i])][1]) == 0){
+                            System.out.println(windows[i]);
+                        }
+                    }                
+                }
+            } else{
+                System.out.println("Skriv ja eller nej");
+                continue;
+            }
             System.out.println("Vilken plats vill du boka? Om du inte vet, kolla lediga platser i huvudmenyn.");
             String userPlace = scanner.nextLine();
             bokstav = false;
