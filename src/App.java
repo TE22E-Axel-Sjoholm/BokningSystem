@@ -36,15 +36,24 @@ public class App {
     }
     public static void seatMap(){
         while (scene == 2) {
-            for(int i = 1; i <= 20; i++){
-                
+            for (int i = 0; i < 20; i++) {
+                if (Integer.parseInt(data[i+1][1]) == 0) {
+                    String platsNummer = (i + 1 < 10) ? (i + 1) + " " : Integer.toString(i + 1);
+                    System.out.print("|" + platsNummer + "|");
+                } else {
+                    System.out.print("|X |");
+                }
+                if (i % 4 == 3 || i == 20) {
+                    System.out.println();
+                } else {
+                    System.out.print(" ");
+                }
             }
-            System.out.println("Tryck enter för huvudmenyn");
+            System.out.println("Tryck enter för att komma tillbaks till huvudmenyn");
             scanner.nextLine();
-            scene = 0;   
+            scene = 0;
         }
     }
-
     public static void infoMeny(){
         while (scene == 3) {
             System.out.println(" ");
@@ -110,7 +119,7 @@ public class App {
                         data[Integer.parseInt(userPlace)][1] = "1";
                         data[Integer.parseInt(userPlace)][2] = userName;
                         data[Integer.parseInt(userPlace)][3] = userAge;
-                        data[Integer.parseInt(userPlace)][4] =  Double.toString(price);
+                        data[Integer.parseInt(userPlace)][4] = Double.toString(price);
                     }
                     bokstav = false;
                 }
