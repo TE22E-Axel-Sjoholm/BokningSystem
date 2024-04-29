@@ -24,13 +24,15 @@ public class App {
             checkIfLetter(userInput);
             if(bokstav){
                 continue;
-            } else if(Integer.parseInt(userInput) == 6 && bokstav == false){
+            } else if(Integer.parseInt(userInput) == 6 && !bokstav){
                     System.exit(0);
                 } else if(Integer.parseInt(userInput) == 1 || Integer.parseInt(userInput) == 2 || Integer.parseInt(userInput) == 3 || Integer.parseInt(userInput) == 4 || Integer.parseInt(userInput) == 6){
                     scene = Integer.parseInt(userInput);
                     infoMeny();
                     booking();
                     seatMap();
+                    search();
+                    unbook();
                 }
         }
     }
@@ -55,7 +57,7 @@ public class App {
         }
     }
     public static void infoMeny(){
-        while (scene == 3) {
+        while(scene == 3){
             System.out.println(" ");
             System.out.println("Pris för vuxen: 299.90kr");
             System.out.println("Pris för barn < 18: 149.90kr");
@@ -68,7 +70,7 @@ public class App {
     }
     public static int priceSum(int k) {
           return 1;
-      }
+    }
     
     static void checkIfLetter(String userInput){
         if(userInput == ""){
@@ -138,12 +140,12 @@ public class App {
                 String userName = scanner.nextLine();
                 String userAge = "";
                 bokstav = false;
-                while(userAge.length() != 8 && bokstav == false) {
+                while(userAge.length() != 8 && !bokstav) {
                     System.out.println("Vad är ditt födelsedatum? ÅÅÅÅMMDD");
                     userAge = scanner.nextLine();
                     bokstav = false;
                     checkIfLetter(userAge);
-                    if(userAge.length() == 8 && bokstav == false){
+                    if(userAge.length() == 8 && !bokstav){
                         priceCalc(Integer.parseInt(userAge));
                         System.out.println("Platsen är bokad, det kostar "+price+"0kr.");
                         data[Integer.parseInt(userPlace)][1] = "1";
@@ -153,6 +155,51 @@ public class App {
                     }
                     bokstav = false;
                 }
+                scene = 0;
+            }
+        }
+    }
+    public static void unbook() {
+
+    }
+    public static void search() {
+        while (scene == 4) {
+            boolean nameSearch = false;
+            boolean yearSearch = false;
+            bokstav = false;
+            System.out.println("Sök födelsedatum eller namn");
+            String userInput = scanner.nextLine();
+            if (userInput.length() == 8) {
+                checkIfLetter(userInput);
+                if (!bokstav) {
+                    yearSearch = true;
+                }
+            } else {
+                nameSearch = true;
+            }
+            if (yearSearch) {
+                for (int i = 0; i < data.length; i++) {
+                    if (data[i][3].equals(userInput)) {
+                        System.out.println("Plats: " + i);
+                        System.out.println("Namn: " + data[i][2]);
+                        System.out.println("Födelsedatum: " + data[i][3]);
+                        System.out.println("Pris: " + data[i][4] + "kr" );
+                    }
+                }
+                System.out.println("Tryck enter för att komma tillbaks till huvudmenyn.");
+                scanner.nextLine();
+                scene = 0;
+            } else if (nameSearch) {
+                for (int i = 0; i < data.length; i++) {
+                    if (data[i][2].equalsIgnoreCase(userInput)) {
+                        System.out.println("Plats: " + i);
+                        System.out.println("Namn: " + data[i][2]);
+                        System.out.println("Födelsedatum: " + data[i][3]);
+                        System.out.println("Pris: " + data[i][4] + "kr");
+                    }
+                }
+                System.out.println("Tryck enter för att komma tillbaks till huvudmenyn.");
+                scanner.nextLine();
                 scene = 0;
             }
         }
