@@ -17,16 +17,17 @@ public class App {
             System.out.println("2. Se lediga platser");
             System.out.println("3. Info");
             System.out.println("4. Sök efter resa");
-            System.out.println("5. Räkna sammanlagd inkomst");
-            System.out.println("6. Avsluta");
+            System.out.println("5. Ta bort en bokning");
+            System.out.println("6. Räkna sammanlagd inkomst");
+            System.out.println("7. Avsluta");
             String userInput = scanner.nextLine();
             bokstav = false;
             checkIfLetter(userInput);
             if(bokstav){
                 continue;
-            } else if(Integer.parseInt(userInput) == 6 && !bokstav){
+            } else if(Integer.parseInt(userInput) == 7 && !bokstav){
                     System.exit(0);
-                } else if(Integer.parseInt(userInput) == 1 || Integer.parseInt(userInput) == 2 || Integer.parseInt(userInput) == 3 || Integer.parseInt(userInput) == 4 || Integer.parseInt(userInput) == 6){
+                } else if(Integer.parseInt(userInput) == 1 || Integer.parseInt(userInput) == 2 || Integer.parseInt(userInput) == 3 || Integer.parseInt(userInput) == 4 || Integer.parseInt(userInput) == 5 || Integer.parseInt(userInput) == 6){
                     scene = Integer.parseInt(userInput);
                     infoMeny();
                     booking();
@@ -160,7 +161,23 @@ public class App {
         }
     }
     public static void unbook() {
-
+        while (scene == 5) {
+            System.out.println("Vilken plats vill du avboka?");
+            String userInput = scanner.nextLine();
+            checkIfLetter(userInput);
+            if(!bokstav && userInput.length() == 1){
+                if(data[Integer.parseInt(userInput)][1] == "1"){
+                    data[Integer.parseInt(userInput)][1] = "0";
+                    data[Integer.parseInt(userInput)][2] = "0";
+                    data[Integer.parseInt(userInput)][3] = "0";
+                    data[Integer.parseInt(userInput)][4] = "0";
+                    System.out.println("Platsen är avbokad");
+                } else{
+                    System.out.println("Platsen är obokad");
+                }
+            }
+            scene = 0;
+        }
     }
     public static void search() {
         while (scene == 4) {
