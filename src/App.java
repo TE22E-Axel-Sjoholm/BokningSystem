@@ -6,6 +6,12 @@ public class App {
     public static String[][] data = new String[21][5];
     public static double price;
     static Scanner scanner = new Scanner(System.in);
+    public static double priceSum(int k) {
+        if (k == 21) {
+            return 0;
+        }
+        return Double.parseDouble(data[k][4]) + priceSum(k + 1);
+    }
     public static void main(String[] args) throws Exception {
         for (int i = 0; i < data.length; i++) {
             for (int j = 0; j < data[i].length; j++) {
@@ -35,6 +41,10 @@ public class App {
                     search();
                     unbook();
                 }
+        }
+        if(scene == 6){
+            System.out.println(priceSum(0) + "kr");
+            scene = 0;
         }
     }
     public static void seatMap(){
@@ -69,10 +79,6 @@ public class App {
             scene = 0;   
         }
     }
-    public static int priceSum(int k) {
-          return 1;
-    }
-    
     static void checkIfLetter(String userInput){
         if(userInput == ""){
             System.out.println("Du skrev inget");
@@ -101,7 +107,6 @@ public class App {
             System.out.println("Vill du ha en fönsterplats? Svara Ja eller Nej");
             String userInput = scanner.nextLine();
             if(userInput.equalsIgnoreCase("nej") || userInput.equalsIgnoreCase("no") || userInput.equalsIgnoreCase("ne") || userInput.equalsIgnoreCase("n") || userInput.equalsIgnoreCase("nah")){
-
             } else if(userInput.equalsIgnoreCase("ja") || userInput.equalsIgnoreCase("yes") || userInput.equalsIgnoreCase("ya") || userInput.equalsIgnoreCase("y") || userInput.equalsIgnoreCase("yea") || userInput.equalsIgnoreCase("yep")){
                 String[] windows = new String[100];
                 for(int i = 0; i < 10; i++){
@@ -165,7 +170,7 @@ public class App {
             System.out.println("Vilken plats vill du avboka?");
             String userInput = scanner.nextLine();
             checkIfLetter(userInput);
-            if(!bokstav && userInput.length() == 1){
+            if(!bokstav){
                 if(data[Integer.parseInt(userInput)][1] == "1"){
                     data[Integer.parseInt(userInput)][1] = "0";
                     data[Integer.parseInt(userInput)][2] = "0";
