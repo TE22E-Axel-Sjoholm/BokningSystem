@@ -25,22 +25,24 @@ public class App {
             System.out.println("4. Sök efter resa");
             System.out.println("5. Ta bort en bokning");
             System.out.println("6. Räkna sammanlagd inkomst");
-            System.out.println("7. Avsluta");
+            System.out.println("7. Se sorterad lista av bokningar");
+            System.out.println("8. Avsluta");
             String userInput = scanner.nextLine();
             bokstav = false;
             checkIfLetter(userInput);
             if(bokstav){
                 continue;
-            } else if(Integer.parseInt(userInput) == 7 && !bokstav){
+            } else if(Integer.parseInt(userInput) == 8){
                     System.exit(0);
-                } else if(Integer.parseInt(userInput) == 1 || Integer.parseInt(userInput) == 2 || Integer.parseInt(userInput) == 3 || Integer.parseInt(userInput) == 4 || Integer.parseInt(userInput) == 5 || Integer.parseInt(userInput) == 6){
-                    scene = Integer.parseInt(userInput);
-                    infoMeny();
-                    booking();
-                    seatMap();
-                    search();
-                    unbook();
-                }
+            } else if(Integer.parseInt(userInput) == 1 || Integer.parseInt(userInput) == 2 || Integer.parseInt(userInput) == 3 || Integer.parseInt(userInput) == 4 || Integer.parseInt(userInput) == 5 || Integer.parseInt(userInput) == 6 || Integer.parseInt(userInput) == 7){
+                scene = Integer.parseInt(userInput);
+                infoMeny();
+                booking();
+                seatMap();
+                search();
+                unbook();
+                list();
+            }
         }
         if(scene == 6){
             System.out.println(priceSum(0) + "kr");
@@ -137,7 +139,8 @@ public class App {
             String userPlace = scanner.nextLine();
             bokstav = false;
             checkIfLetter(userPlace);
-            if(bokstav){        
+            if(bokstav || Integer.parseInt(userPlace) >= 21 || Integer.parseInt(userPlace) <= 0){    
+                System.out.println("Skriv ett en plats mellan 1 - 20");    
                 continue;
             } else if(data[Integer.parseInt(userPlace)][1] == "1"){
                 System.out.println("Platsen är upptagen, kolla efter lediga platser i huvudmenyn.");
@@ -223,7 +226,18 @@ public class App {
                 System.out.println("Tryck enter för att komma tillbaks till huvudmenyn.");
                 scanner.nextLine();
                 scene = 0;
+            } else{
+                System.out.println("Inga resultat.");
+                System.out.println("Tryck enter för att komma tillbaks till huvudmenyn.");
+                scanner.nextLine();
+                scene = 0;
             }
+        }
+    }
+    public static void list(){
+        while (scene == 7){
+           System.out.println("Comming soon.. kanske");
+           scene = 0;
         }
     }
 }
